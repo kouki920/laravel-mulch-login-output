@@ -5,6 +5,7 @@
 
 <div class="container mt-4">
 
+@if($post->user_id === Auth::id())
 <form action="{{ route('board.edit', ['id' => $post->id]) }}" method="GET" >
 @csrf
 <div class="mb-4 text-right">
@@ -18,15 +19,17 @@
 <button class="btn btn-danger">削除</button>
 </div>
 </form>
+@endif
 
 <div class="card mb-4">
                 <div class="card-header">
                     タイトル: {{ $post->title }}&ensp;
                     カテゴリ: {{$post->category->name}}
+                    {{$post->user_id}}
                 </div>
                 <div class="card-body">
                 <p class="card-text">
-                        {!! nl2br(e(Str::limit($post->body, 140))) !!}
+                        {!! nl2br(e($post->body)) !!}
                         <!-- 文字数表示制限 -->
                     </p>
                     <span class="mr-2">

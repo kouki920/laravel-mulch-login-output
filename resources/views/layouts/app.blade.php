@@ -49,6 +49,7 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -59,6 +60,10 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('ログアウト') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('board.profile') }}">
+                                        {{ __('マイページ') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('board.logout') }}" method="GET" style="display: none;">

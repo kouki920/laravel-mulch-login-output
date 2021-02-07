@@ -26,6 +26,7 @@ Route::group(['prefix'=>'board','middleware'=>'auth'],function(){
     Route::post('update/{id}','BoardsController@update')->name('board.update');
     Route::post('destroy/{id}','BoardsController@destroy')->name('board.destroy');
     Route::get('logout','BoardsController@getLogout')->name('board.logout');
+    Route::get('profile','BoardsController@getProfile')->name('board.profile');
 });
 
 Route::group(['prefix'=>'comment','middleware'=>'auth'],function (){

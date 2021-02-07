@@ -31,7 +31,8 @@ class BoardsController extends Controller
 
         $category_id = $request->category_id;
 
-        $posts = Post::with(['comments','category'])->orderBy('created_at', 'desc')->categoryId($category_id)->searchWords($searchword)->paginate(10);
+        $posts = Post::with(['comments','category','user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->searchWords($searchword)->paginate(10);
+        // dd($posts);
 
 
         return view('posts.index',compact('posts','categories','category_id','searchword'));
@@ -134,5 +135,12 @@ class BoardsController extends Controller
     public function getLogout(){
         Auth::logout();
         return redirect()->route('user.login');
+    }
+    /**
+     * プロフィールに遷移
+     */
+    public function getProfile()
+    {
+        return view('user.profile');
     }
 }
