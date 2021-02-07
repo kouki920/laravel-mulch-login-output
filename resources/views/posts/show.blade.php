@@ -25,7 +25,7 @@
                 <div class="card-header">
                     タイトル: {{ $post->title }}&ensp;
                     カテゴリ: {{$post->category->name}}
-                    {{$post->user_id}}
+
                 </div>
                 <div class="card-body">
                 <p class="card-text">

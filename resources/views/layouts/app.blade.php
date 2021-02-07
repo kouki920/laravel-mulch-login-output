@@ -62,7 +62,7 @@
                                         {{ __('ログアウト') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('board.profile') }}">
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
                                         {{ __('マイページ') }}
                                     </a>
 

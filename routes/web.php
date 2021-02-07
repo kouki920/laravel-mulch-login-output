@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;//変更箇所
 
 
@@ -26,7 +27,7 @@ Route::group(['prefix'=>'board','middleware'=>'auth'],function(){
     Route::post('update/{id}','BoardsController@update')->name('board.update');
     Route::post('destroy/{id}','BoardsController@destroy')->name('board.destroy');
     Route::get('logout','BoardsController@getLogout')->name('board.logout');
-    Route::get('profile','BoardsController@getProfile')->name('board.profile');
+
 });
 
 Route::group(['prefix'=>'comment','middleware'=>'auth'],function (){
@@ -35,6 +36,11 @@ Route::group(['prefix'=>'comment','middleware'=>'auth'],function (){
 
 });
 
+Route::group(['prefix'=>'user','middleware'=>'auth'],function(){
+    Route::get('index','UserController@index')->name('user.index');
+    Route::get('edit/{id}','UserController@edit')->name('user.edit');
+    Route::post('update/{id}','UserController@update')->name('user.update');
+});
 
 
 Route::namespace('User')->prefix('user')->name('user.')->group(function () {

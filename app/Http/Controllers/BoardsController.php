@@ -104,7 +104,7 @@ class BoardsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Storeposts $request, $id)
+    public function update( Storeposts $request)
     {
 
         $post = Post::findOrFail($request->id);
@@ -135,12 +135,5 @@ class BoardsController extends Controller
     public function getLogout(){
         Auth::logout();
         return redirect()->route('user.login');
-    }
-    /**
-     * プロフィールに遷移
-     */
-    public function getProfile()
-    {
-        return view('user.profile');
     }
 }
