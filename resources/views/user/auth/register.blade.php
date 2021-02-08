@@ -61,6 +61,8 @@
                             </div>
                         </div>
 
+                                <input id="introduction" type="hidden" class="form-control @error('introduction') is-invalid @enderror" name="introduction" value="よろしくお願いします" autocomplete="introduction" autofocus>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

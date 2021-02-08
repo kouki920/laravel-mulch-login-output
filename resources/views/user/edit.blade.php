@@ -11,7 +11,7 @@
 <form action="{{route('user.update',$auth->id)}}" method="POST">
                     @csrf
 
-                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="id" value="{{$auth->id}}">
 
                     <div class="card-body">
                     氏名:<br>

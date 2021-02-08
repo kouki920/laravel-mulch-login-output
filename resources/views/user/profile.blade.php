@@ -2,34 +2,30 @@
 
 @section('content')
 
-
-
 <div class="container mt-4 text-center">
-<form action="{{ route('user.edit',Auth::id()) }}" method="GET" >
+<form action="{{ route('user.edit',$auth->id) }}" method="GET" >
 @csrf
 <div class="mb-4 text-right">
 <button class="btn btn-primary">編集</button>
 </div>
 </form>
 <div class="card mb-4 ">
-氏名:{{Auth::user()->name}}
+氏名:{{$auth->name}}
 </div>
 
 <div class="card-body">
 <p class="card-text">
 自己紹介
 <br>
-{!! nl2br(e(Auth::user()->introduction)) !!}
+{!! nl2br(e($auth->introduction)) !!}
 </p>
 </div>
 
 @foreach($posts as $post)
-
 <div class="card mb-4">
                 <div class="card-header">
                 タイトル: {{ $post->title }}&ensp;
                 カテゴリ: {{ $post->category->name }}
-
                 </div>
                 <div class="card-body">
                 <p class="card-text">
@@ -51,12 +47,9 @@
 <a href="{{route('board.show',['id' => $post->id])}}" class="btn btn-primary">詳細へ</a>
 </div>
 </div>
-
 @endforeach
 <div class="mt-2 center-block">
 {{$posts->links()}}
 </div>
-
 </div>
-
 @endsection

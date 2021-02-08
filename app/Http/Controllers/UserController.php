@@ -17,9 +17,10 @@ class UserController extends Controller
 
         $user_id = Auth::id();
 
+        $auth = Auth::user();
+
         $posts = Post::with(['comments','category','user'])->orderBy('created_at', 'desc')->where('user_id',$user_id)->paginate(5);
 
-        $auth = Auth::user();
         return view('user.profile',compact('auth','posts','user_id'));
     }
 
@@ -31,9 +32,6 @@ class UserController extends Controller
 
     public function update(UserRequest $request)
     {
-        // $validated = $request->validated();
-        // User::create($validated);
-
         $user = User::findOrFail($request->id);
 
         $user->fill($request->all())->save();
