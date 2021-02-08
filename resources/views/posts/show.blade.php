@@ -4,23 +4,23 @@
 @section('content')
 
 <div class="container mt-4">
-
+<div class='btn-toolbar' role="toolbar">
 @if($post->user_id === Auth::id())
 <form action="{{ route('board.edit', ['id' => $post->id]) }}" method="GET" >
 @csrf
-<div class="mb-4 text-right">
+<div class="mb-4 mr-2">
 <button class="btn btn-primary">編集</button>
 </div>
 </form>
 
 <form action="{{ route('board.destroy', ['id' => $post->id]) }}" method="POST" >
 @csrf
-<div class="mb-4 text-right">
+<div class="mb-4">
 <button class="btn btn-danger">削除</button>
 </div>
 </form>
 @endif
-
+</div>
 <div class="card mb-4">
                 <div class="card-header">
                     タイトル: {{ $post->title }}&ensp;
