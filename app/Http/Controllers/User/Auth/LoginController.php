@@ -75,17 +75,36 @@ class LoginController extends Controller
 
         return $this->loggedOut($request);
     }
-
+    /**
+     * ログアウトの処理
+     * ルート指定 route('user.login')
+     */
     public function loggedOut(Request $request)
     {
         return redirect(route('user.login'));
     }
-
+    /**
+     * ログイン後のリダイレクト先指定
+     */
     public function redirectPath()
     {
         return 'board/index';
         //例）return 'costs/index';
     }
 
+    /**
+     * ゲストログイン機能
+     * ゲストユーザー用のid指定
+     * ゲストログイン処理
+     */
 
+    private const GUEST_USER_ID = 22;
+
+    public function guestLogin()
+    {
+        if (Auth::loginUsingId(self::GUEST_USER_ID)) {
+            return redirect('board/index');
+        }
+        return redirect('user/login');
+    }
 }
