@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGenderToUsersTable extends Migration
+class AddOccupationToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,13 @@ class AddGenderToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('gender')->after('age');
+            $table->string('occupation', 30)->after('company');
         });
     }
 
     /**
      * Reverse the migrations.
-     *gi
+     *
      * @return void
      */
     public function down()

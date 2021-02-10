@@ -35,8 +35,11 @@ class UserRequest extends FormRequest
         } else {
             return [
                 'name' => 'required|string',
-                'email' => 'required|email:strict,dns,spoof|unique:users',
-                'introduction' => 'string|max:200|nullable',
+                'age' => 'required|max:70|integer',
+                'company' => 'required|string|max:255',
+                'occupation' => 'required|string|max:50',
+                'position' => 'required|string|max:50',
+                'introduction' => 'string|max:500|nullable',
                 // 'password' => ['required']
             ];
         }
