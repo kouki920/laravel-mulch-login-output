@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSelfintroductionToUsersTable extends Migration
+class AddAgeToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,11 @@ class AddSelfintroductionToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('introduction',200);
+            $table->integer('age')->after('name');
+            $table->string('company', 255)->after('age');
+            $table->integer('category_id')->after('company');
+            $table->string('position', 50)->after('category_id');
+            $table->string('area', 100)->after('position');
         });
     }
 
