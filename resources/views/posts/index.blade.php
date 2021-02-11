@@ -48,6 +48,8 @@
 
     <div class="card mb-4">
         <div class="card-header">
+            {{$post->user->name}}
+            <br>
             タイトル: {{ $post->title }}&ensp;
             #{{ $post->category->name }}&ensp;
             顧客:{{$post->client->type}}

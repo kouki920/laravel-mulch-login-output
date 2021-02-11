@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,51 +10,58 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     @if ($errors->any())
                     <div class="alert alert-danger">
-                    <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                    @endforeach
-                    </ul>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
                     </div>
                     @endif
 
 
                     <form action="{{route('board.update',['id' => $post->id])}}" method="POST">
-                    @csrf
-                    <div class="card-body">
-                    タイトル:<br>
-                    <input class="form-control" type="text" name="title" value="{{$post->title}}">
-                    <br>
+                        @csrf
+                        <div class="card-body">
+                            タイトル<br>
+                            <input class="form-control" type="text" name="title" value="{{$post->title}}">
+                            <br>
+                            カテゴリ
+                            <select id="category_id" name="category_id" class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}">
+                                @foreach($categories as $id => $name)
+                                <option value="{{ $id }}" @if ($post->category_id == $id)
+                                    selected
+                                    @endif
+                                    >{{ $name }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            顧客
+                            <select id="client_id" name="client_id" class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}">
+                                @foreach($clients as $id => $type)
+                                <option value="{{ $id }}" @if ($post->client_id == $id)
+                                    selected
+                                    @endif
+                                    >{{ $type }}</option>
+                                @endforeach
+                            </select>
 
-                    <select
-    id="category_id"
-    name="category_id"
-    class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
->
-    @foreach($categories as $id => $name)
-        <option value="{{ $id }}"
-            @if ($post->category_id == $id)
-                selected
-            @endif
-        >{{ $name }}</option>
-    @endforeach
-</select>
-                    1コメ:<br>
-                    <textarea class="form-control" name="body" cols="30" rows="5">{{$post->body}}</textarea>
-                    <br>
-                    <input class="btn btn-info" type="submit" value="更新">
-                    <div class="mt-2">
-                        <a class="btn btn-secondary" href="{{ route('board.show', ['id' => $post->id]) }}">
-                            キャンセル
-                        </a>
-                    </div>
+                            メモ<br>
+                            <textarea class="form-control" name="body" cols="30" rows="5">{{$post->body}}</textarea>
+                            <br>
+                            <input type="hidden" name="user_id" value="{{ $post->user_id }}">
+                            <input class="btn btn-info" type="submit" value="更新">
+                            <div class="mt-2">
+                                <a class="btn btn-secondary" href="{{ route('board.show', ['id' => $post->id]) }}">
+                                    キャンセル
+                                </a>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -101,9 +101,15 @@ class BoardsController extends Controller
         $category = new Category();
         $categories = $category->getLists()->prepend('選択', '');
 
+        $client = new Client();
+        $clients = $client->getClient()->prepend('選択', '');
+
         $post = Post::findOrFail($id);
 
-        return view('posts.edit', compact('post', 'categories'));
+        // $auth = Auth::id();
+        // dd($auth);
+
+        return view('posts.edit', compact('post', 'categories', 'clients'));
     }
 
     /**

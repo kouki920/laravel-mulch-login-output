@@ -29,6 +29,7 @@
 
                     <form action="{{route('board.store')}}" method="POST">
                         @csrf
+
                         タイトル<br>
                         <input class="form-control" type="text" name="title">
                         <br>
@@ -51,7 +52,7 @@
 
                         <div class="form-group">
                             <label for="subject">
-                                カテゴリ
+                                顧客
                             </label>
                             <select id="client_id" name="client_id" class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}" value="{{ old('client_id') }}">
                                 @foreach($clients as $id => $type)
