@@ -14,6 +14,7 @@ class Post extends Model
         'created_at',
         'updated_at',
         'category_id',
+        'client_id',
         'user_id',
     ];
 
@@ -30,29 +31,50 @@ class Post extends Model
     /**
      * userテーブルとリレーション
      */
-
-     public function user()
-     {
-         return $this->belongsTo('App\Models\User');
-     }
-
-    // カテゴリーのスコープ
-    public function scopeCategoryId($query,$category_id)
+    public function user()
     {
-        if(empty($category_id)){
-            return;
-        }
-        return $query->where('category_id',$category_id);
+        return $this->belongsTo('App\Models\User');
     }
 
-    // ワード検索のスコープ
-    public function scopeSearchWords($query,$searchword){
-        if(empty($searchword)){
+    /**
+     *clientテーブルとリレーション
+     */
+    public function client()
+    {
+        return $this->belongsTo('App\Models\Client');
+    }
+
+    // カテゴリーのスコープ
+    public function scopeCategoryId($query, $category_id)
+    {
+        if (empty($category_id)) {
             return;
         }
-        return $query->where(function($query) use($searchword){
-            $query->orWhere('title','like',"%{$searchword}%")
-                ->orWhere('body','like',"%{$searchword}%");
+        return $query->where('category_id', $category_id);
+    }
+
+    /**
+     * clientのスコープ
+     */
+    public function scopeClientID($query, $client_id)
+    {
+        if (empty($client_id)) {
+            return;
+        }
+        return $query->where('client_id', $client_id);
+    }
+
+    /**
+     *  ワード検索のスコープ
+     */
+    public function scopeSearchWords($query, $searchword)
+    {
+        if (empty($searchword)) {
+            return;
+        }
+        return $query->where(function ($query) use ($searchword) {
+            $query->orWhere('title', 'like', "%{$searchword}%")
+                ->orWhere('body', 'like', "%{$searchword}%");
         });
     }
 }

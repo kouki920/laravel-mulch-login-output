@@ -26,14 +26,16 @@
                     @endif
 
 
+
                     <form action="{{route('board.store')}}" method="POST">
                         @csrf
-                        本日の活動報告<br>
+                        タイトル<br>
                         <input class="form-control" type="text" name="title">
                         <br>
+
                         <div class="form-group">
                             <label for="subject">
-                                業界
+                                カテゴリ
                             </label>
                             <select id="category_id" name="category_id" class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}" value="{{ old('category_id') }}">
                                 @foreach($categories as $id => $name)
@@ -46,7 +48,24 @@
                             </div>
                             @endif
                         </div>
-                        活動内容<br>
+
+                        <div class="form-group">
+                            <label for="subject">
+                                カテゴリ
+                            </label>
+                            <select id="client_id" name="client_id" class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}" value="{{ old('client_id') }}">
+                                @foreach($clients as $id => $type)
+                                <option value="{{ $id }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('client_id'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('client_id') }}
+                            </div>
+                            @endif
+                        </div>
+
+                        メモ<br>
                         <textarea class="form-control" name="body" cols="30" rows="5"></textarea>
 
                         <br>
@@ -54,6 +73,7 @@
                         <input class="btn btn-info" type="submit" value="投稿">
 
                     </form>
+
                 </div>
             </div>
         </div>

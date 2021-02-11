@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Requests\Storeposts;
+use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 
 class BoardsController extends Controller
@@ -27,15 +28,20 @@ class BoardsController extends Controller
         $category = new Category();
         $categories = $category->getLists();
 
-        $searchword = $request->searchword;
-
         $category_id = $request->category_id;
 
-        $posts = Post::with(['comments','category','user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->searchWords($searchword)->paginate(10);
+        $client = new Client();
+        $clients = $client->getClient();
+
+        $client_id = $request->client_id;
+
+        $searchword = $request->searchword;
+
+        $posts = Post::with(['comments', 'category', 'user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->clientID($client_id)->searchWords($searchword)->paginate(10);
         // dd($posts);
 
 
-        return view('posts.index',compact('posts','categories','category_id','searchword'));
+        return view('posts.index', compact('posts', 'categories', 'clients', 'category_id', 'searchword'));
     }
 
     /**
@@ -46,12 +52,15 @@ class BoardsController extends Controller
     public function create(Request $request)
     {
         $category = new Category();
-       $categories = $category->getLists()->prepend('選択','');
+        $categories = $category->getLists()->prepend('選択', '');
 
-       $post = new Post();
+        $client = new Client();
+        $clients = $client->getClient()->prepend('選択', '');
+
+        $post = new Post();
         $posts = $post->user_id = $request->user()->id;
 
-        return view('posts.create',compact('categories','posts'));
+        return view('posts.create', compact('categories', 'clients', 'posts'));
     }
 
     /**
@@ -78,7 +87,7 @@ class BoardsController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.show',compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -90,11 +99,11 @@ class BoardsController extends Controller
     public function edit($id)
     {
         $category = new Category();
-        $categories = $category->getLists()->prepend('選択','');
+        $categories = $category->getLists()->prepend('選択', '');
 
         $post = Post::findOrFail($id);
 
-        return view('posts.edit' ,compact('post','categories'));
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -104,7 +113,7 @@ class BoardsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Storeposts $request)
+    public function update(Storeposts $request)
     {
 
         $post = Post::findOrFail($request->id);
@@ -124,15 +133,15 @@ class BoardsController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        DB::transaction(function () use ($post){
+        DB::transaction(function () use ($post) {
             $post->comments()->delete();
             $post->delete();
         });
         return redirect('board/index');
-
     }
 
-    public function getLogout(){
+    public function getLogout()
+    {
         Auth::logout();
         return redirect()->route('user.login');
     }
