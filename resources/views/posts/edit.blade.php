@@ -52,6 +52,16 @@
                                 @endforeach
                             </select>
 
+                            売上獲得方法
+                            <select id="approach_id" name="approach_id" class="form-control {{ $errors->has('approach_id') ? 'is-invalid' : '' }}">
+                                @foreach($approaches as $id => $method)
+                                <option value="{{ $id }}" @if ($post->approach_id == $id)
+                                    selected
+                                    @endif
+                                    >{{ $method }}</option>
+                                @endforeach
+                            </select>
+
                             メモ<br>
                             <textarea class="form-control" name="body" cols="30" rows="5">{{$post->body}}</textarea>
                             <br>

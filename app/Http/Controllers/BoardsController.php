@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Requests\Storeposts;
+use App\Models\Approach;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,6 @@ class BoardsController extends Controller
 
     public function index(Request $request)
     {
-        // $posts = DB::table('posts')->select('title','body','created_at','comments')->get();
 
         $category = new Category();
         $categories = $category->getLists();
@@ -35,13 +35,18 @@ class BoardsController extends Controller
 
         $client_id = $request->client_id;
 
+        $approach = new Approach();
+        $approaches = $approach->getApproach();
+
+        $approach_id = $request->approach_id;
+
         $searchword = $request->searchword;
 
-        $posts = Post::with(['comments', 'category', 'user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->clientID($client_id)->searchWords($searchword)->paginate(10);
+        $posts = Post::with(['comments', 'category', 'client', 'approach', 'user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->clientID($client_id)->approachId($approach_id)->searchWords($searchword)->paginate(10);
         // dd($posts);
 
 
-        return view('posts.index', compact('posts', 'categories', 'clients', 'category_id', 'searchword'));
+        return view('posts.index', compact('posts', 'categories', 'clients', 'approaches', 'category_id', 'client_id', 'approach_id', 'searchword'));
     }
 
     /**
@@ -57,10 +62,13 @@ class BoardsController extends Controller
         $client = new Client();
         $clients = $client->getClient()->prepend('選択', '');
 
+        $approach = new Approach();
+        $approaches = $approach->getApproach()->prepend('選択', '');
+
         $post = new Post();
         $posts = $post->user_id = $request->user()->id;
 
-        return view('posts.create', compact('categories', 'clients', 'posts'));
+        return view('posts.create', compact('categories', 'clients', 'approaches', 'posts'));
     }
 
     /**
@@ -104,12 +112,15 @@ class BoardsController extends Controller
         $client = new Client();
         $clients = $client->getClient()->prepend('選択', '');
 
+        $approach = new Approach();
+        $approaches = $approach->getApproach()->prepend('選択', '');
+
         $post = Post::findOrFail($id);
 
         // $auth = Auth::id();
         // dd($auth);
 
-        return view('posts.edit', compact('post', 'categories', 'clients'));
+        return view('posts.edit', compact('post', 'categories', 'approaches', 'clients'));
     }
 
     /**

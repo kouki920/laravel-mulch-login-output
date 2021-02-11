@@ -66,6 +66,22 @@
                             @endif
                         </div>
 
+                        <div class="form-group">
+                            <label for="subject">
+                                売上獲得方法
+                            </label>
+                            <select id="approach_id" name="approach_id" class="form-control {{ $errors->has('approach_id') ? 'is-invalid' : '' }}" value="{{ old('approach_id') }}">
+                                @foreach($approaches as $id => $method)
+                                <option value="{{ $id }}">{{ $method }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('approach_id'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('approach_id') }}
+                            </div>
+                            @endif
+                        </div>
+
                         メモ<br>
                         <textarea class="form-control" name="body" cols="30" rows="5"></textarea>
 

@@ -15,6 +15,7 @@ class Post extends Model
         'updated_at',
         'category_id',
         'client_id',
+        'approach_id',
         'user_id',
     ];
 
@@ -44,6 +45,14 @@ class Post extends Model
         return $this->belongsTo('App\Models\Client');
     }
 
+    /**
+     * approachテーブルとリレーション
+     */
+    public function approach()
+    {
+        return $this->belongsTo('App\Models\Approach');
+    }
+
     // カテゴリーのスコープ
     public function scopeCategoryId($query, $category_id)
     {
@@ -63,7 +72,16 @@ class Post extends Model
         }
         return $query->where('client_id', $client_id);
     }
-
+    /**
+     * approachのスコープ
+     */
+    public function scopeApproachId($query, $approach_id)
+    {
+        if (empty($approach_id)) {
+            return;
+        }
+        return $query->where('approach_id', $approach_id);
+    }
     /**
      *  ワード検索のスコープ
      */

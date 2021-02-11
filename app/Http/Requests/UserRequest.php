@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
      *バリデーション指定を外すことで編集できないようにする
      * @return array
      */
-    private const GUEST_USER_ID = 22;
+    private const GUEST_USER_ID = 1;
 
     public function rules()
     {

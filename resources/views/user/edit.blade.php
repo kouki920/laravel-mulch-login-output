@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     編集
-                    @if (Auth::id() == 22)
+                    @if (Auth::id() == 1)
                     <p class="text-danger">※ゲストユーザーは、編集できません。</p>
                     @endif
                 </div>
@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                         <label for="name">ユーザー名</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() ==1)
                         <input class="form-control" type="text" id="name" name="name" value="{{$auth->name}}" readonly>
                         @else
                         <input class="form-control" type="text" id="name" name="name" value="{{$auth->name ?? old('name') }}">
@@ -29,7 +29,7 @@
 
                     <div class="card-body">
                         <label for="name">年齢</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() == 1)
                         <input class="form-control" type="number" id="age" name="age" value="{{$auth->age}}" readonly>
                         @else
                         <input class="form-control" type="number" id="age" name="age" value="{{$auth->age ?? old('age') }}">
@@ -38,7 +38,7 @@
 
                     <div class="card-body">
                         <label for="company">社名</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() == 1)
                         <input class="form-control" type="text" id="company" name="company" value="{{$auth->company}}" readonly>
                         @else
                         <input class="form-control" type="text" id="company" name="company" value="{{$auth->company ?? old('company') }}">
@@ -47,7 +47,7 @@
 
                     <div class="card-body">
                         <label for="occupation">職業</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() == 1)
                         <input class="form-control" type="text" id="occupation" name="occupation" value="{{$auth->occupation}}" readonly>
                         @else
                         <input class="form-control" type="text" id="occupation" name="occupation" value="{{$auth->occupation ?? old('occupation') }}">
@@ -57,25 +57,16 @@
 
                     <div class="card-body">
                         <label for="position">役職</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() == 1)
                         <input class="form-control" type="text" id="position" name="position" value="{{$auth->position}}" readonly>
                         @else
                         <input class="form-control" type="text" id="position" name="position" value="{{$auth->position ?? old('position') }}">
                         @endif
                     </div>
 
-                    <!-- <div class="card-body">
-                        <label for="email">メールアドレス</label>
-                        @if (Auth::id() == 22)
-                        <input class="form-control" type="text" id="email" name="email" value="{{$auth->email}}" readonly>
-                        @else
-                        <input class="form-control" type="text" id="email" name="email" value="{{$auth->email ?? old('email')}}">
-                        @endif
-                    </div> -->
-
                     <div class="card-body">
                         <label for="introduction">自己紹介</label>
-                        @if (Auth::id() == 22)
+                        @if (Auth::id() == 1)
                         <textarea class="form-control" name="introduction" id="introduction" cols="30" rows="5" readonly>{{$auth->introduction}}</textarea>
                         @else
                         <textarea class="form-control" name="introduction" id="introduction" cols="30" rows="5">

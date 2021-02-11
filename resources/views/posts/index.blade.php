@@ -39,6 +39,11 @@
         @foreach($clients as $id => $type)
         <span class="btn"><a class="text-decoration-none" href="{{ route('board.index', ['client_id'=>$id]) }}" title="{{ $type }}">#{{ $type }}</a></span>
         @endforeach
+        <br>
+        売上獲得方法:
+        @foreach($approaches as $id => $method)
+        <span class="btn"><a class="text-decoration-none" href="{{ route('board.index', ['approach_id'=>$id]) }}" title="{{ $method }}">#{{ $method }}</a></span>
+        @endforeach
     </div>
 
     <!-- 一覧 -->
@@ -57,7 +62,10 @@
         </div>
         <div class="card-body">
             <p class="card-text">
-                メモ:&ensp;{!! nl2br(e(Str::limit($post->body, 140))) !!}
+                売上獲得方法:&ensp;{{$post->approach->method}}
+                <br>
+                <hr>
+                {!! nl2br(e(Str::limit($post->body, 140))) !!}
                 <!-- 文字数表示制限 -->
             </p>
         </div>
@@ -76,6 +84,6 @@
         </div>
     </div>
     @endforeach
-    {{$posts->appends(['category_id' => $category_id,'searchword' => $searchword])->links()}}
+    {{$posts->appends(['category_id' => $category_id,'client_id' => $client_id,'approach_id' => $approach_id,'searchword' => $searchword])->links()}}
 </div>
 @endsection

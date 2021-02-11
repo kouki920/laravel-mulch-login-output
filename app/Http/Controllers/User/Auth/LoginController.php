@@ -98,7 +98,7 @@ class LoginController extends Controller
      * ゲストログイン処理
      */
 
-    private const GUEST_USER_ID = 22;
+    private const GUEST_USER_ID = 1;
 
     public function guestLogin()
     {
