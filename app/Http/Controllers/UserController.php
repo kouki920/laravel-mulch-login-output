@@ -20,9 +20,12 @@ class UserController extends Controller
 
         $auth = Auth::user();
 
+        $user = new User();
+        $gender = $user->getUserGender();
+
         $posts = Post::with(['comments', 'category', 'user'])->orderBy('created_at', 'desc')->where('user_id', $user_id)->paginate(5);
 
-        return view('user.profile', compact('auth', 'posts', 'user_id'));
+        return view('user.profile', compact('auth', 'posts', 'user_id', 'gender'));
     }
 
     public function edit($id)

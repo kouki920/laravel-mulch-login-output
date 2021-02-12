@@ -12,7 +12,7 @@
     <div class="card-body">
 
         {{$auth->name}}&ensp;|&ensp;({{$auth->age}})&ensp;|&ensp;
-        {{$auth->gender}}
+        {{$gender}}
         <br>
         {{$auth->company}}
         <br>
@@ -34,11 +34,15 @@
         <div class="card mb-4">
             <div class="card-header">
                 タイトル: {{ $post->title }}&ensp;
-                カテゴリ: {{ $post->category->name }}
+                カテゴリ: {{ $post->category->name }}&ensp;
+                顧客:{{$post->client->type}}
             </div>
             <div class="card-body">
                 <p class="card-text">
-                    1コメ: {!! nl2br(e(Str::limit($post->body, 140))) !!}
+                    売上獲得方法:&ensp;{{$post->approach->method}}
+                    <br>
+                    <hr>
+                    {!! nl2br(e(Str::limit($post->body, 140))) !!}
                     <!-- 文字数表示制限 -->
                 </p>
             </div>

@@ -42,4 +42,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Post');
     }
+
+    public function getUserGender()
+    {
+        if (Auth::user()->gender === 'male') {
+            return $gender = '男性';
+        } else {
+            return $gender = '女性';
+        }
+    }
 }
