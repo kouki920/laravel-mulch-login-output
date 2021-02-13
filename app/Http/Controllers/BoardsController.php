@@ -42,8 +42,11 @@ class BoardsController extends Controller
 
         $searchword = $request->searchword;
 
+
         $posts = Post::with(['comments', 'category', 'client', 'approach', 'user:id,name'])->orderBy('created_at', 'desc')->categoryId($category_id)->clientID($client_id)->approachId($approach_id)->searchWords($searchword)->paginate(10);
-        // dd($posts);
+
+
+
 
 
         return view('posts.index', compact('posts', 'categories', 'clients', 'approaches', 'category_id', 'client_id', 'approach_id', 'searchword'));
@@ -80,8 +83,21 @@ class BoardsController extends Controller
     public function store(Storeposts $request)
     {
 
+        $post = new Post();
+        $post->user_id = $request->user_id;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->category_id = $request->category_id;
+        $post->client_id = $request->client_id;
+        $post->approach_id = $request->approach_id;
+        $post->price = $request->price;
+        $post->count = $request->count;
+        $post->getTotalPrice();
         $validated = $request->validated();
-        Post::create($validated);
+        $post->save($validated);
+
+        // $validated = $request->validated();
+        // Post::create($validated);
 
         return redirect('board/index');
     }
@@ -134,6 +150,10 @@ class BoardsController extends Controller
     {
 
         $post = Post::findOrFail($request->id);
+
+        $post->price = $request->price;
+        $post->count = $request->count;
+        $post->getTotalPrice();
 
         $post->fill($request->all())->save();
 

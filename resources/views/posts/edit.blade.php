@@ -42,6 +42,12 @@
                                 @endforeach
                             </select>
                             <br>
+                            単価<br>
+                            <input class="form-control" type="number" name="price" value="{{$post->price}}">
+                            <br>
+                            販売数<br>
+                            <input class="form-control" type="number" name="count" value="{{$post->count}}">
+                            <br>
                             顧客
                             <select id="client_id" name="client_id" class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}">
                                 @foreach($clients as $id => $type)

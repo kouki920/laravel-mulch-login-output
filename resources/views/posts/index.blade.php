@@ -26,7 +26,7 @@
     </div>
 
     <div class="mt-4 mb-4">
-        <p>{{ $posts->total() }}件です。</p>
+        <p>表示結果:{{ $posts->total() }}件</p>
     </div>
     <!-- タグ別のリンク -->
     <div class="mt-4 mb-4">
@@ -57,11 +57,14 @@
             <br>
             タイトル: {{ $post->title }}&ensp;
             #{{ $post->category->name }}&ensp;
-            顧客:{{$post->client->type}}
+
 
         </div>
         <div class="card-body">
             <p class="card-text">
+                単価:¥{{number_format($post->price)}}&ensp;販売数:{{number_format($post->count)}}&ensp;売上:¥{{number_format($post->total)}}
+                <br>
+                顧客:{{$post->client->type}}&ensp;
                 売上獲得方法:&ensp;{{$post->approach->method}}
                 <br>
                 <hr>

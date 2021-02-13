@@ -10,6 +10,9 @@ class Post extends Model
 {
     protected $fillable = [
         'title',
+        'price',
+        'count',
+        'total',
         'body',
         'created_at',
         'updated_at',
@@ -94,5 +97,10 @@ class Post extends Model
             $query->orWhere('title', 'like', "%{$searchword}%")
                 ->orWhere('body', 'like', "%{$searchword}%");
         });
+    }
+
+    public function getTotalPrice()
+    {
+        $this->total = $this->price * $this->count;
     }
 }

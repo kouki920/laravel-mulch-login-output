@@ -25,6 +25,9 @@ class Storeposts extends FormRequest
     {
         return [
             'title' => 'required|string|max:50',
+            'price' => 'required|integer',
+            'count' => 'required|integer',
+            'total' => 'integer',
             'body' => 'required|string|max:200',
             'category_id' => 'required|integer',
             'client_id' => 'required|integer',

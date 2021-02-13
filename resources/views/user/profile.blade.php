@@ -17,6 +17,7 @@
         {{$auth->company}}
         <br>
         {{$auth->occupation}}&ensp;|&ensp;{{$auth->position}}
+        <br>
     </div>
 
     <div class="card-body">
@@ -30,15 +31,29 @@
             </p>
         </div>
 
+        <div class="card-header">
+            累計売上高(個人別)
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                ¥{{number_format($sales)}}
+            </p>
+        </div>
+
+
         @foreach($posts as $post)
         <div class="card mb-4">
             <div class="card-header">
                 タイトル: {{ $post->title }}&ensp;
                 カテゴリ: {{ $post->category->name }}&ensp;
-                顧客:{{$post->client->type}}
+
             </div>
             <div class="card-body">
                 <p class="card-text">
+                    単価:¥{{number_format($post->price)}}&ensp;販売数:{{number_format($post->count)}}&ensp;売上:¥{{number_format($post->total)}}
+                    <br>
+                    <br>
+                    顧客:{{$post->client->type}}&ensp;
                     売上獲得方法:&ensp;{{$post->approach->method}}
                     <br>
                     <hr>
