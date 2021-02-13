@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -23,9 +24,11 @@ class UserController extends Controller
         $user = new User();
         $gender = $user->getUserGender();
 
+        $sales = Post::sum('total');
+
         $posts = Post::with(['comments', 'category', 'user'])->orderBy('created_at', 'desc')->where('user_id', $user_id)->paginate(5);
 
-        return view('user.profile', compact('auth', 'posts', 'user_id', 'gender'));
+        return view('user.profile', compact('auth', 'posts', 'user_id', 'gender', 'sales'));
     }
 
     public function edit($id)
