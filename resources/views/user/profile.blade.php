@@ -32,11 +32,11 @@
         </div>
 
         <div class="card-header">
-            累計売上高(個人別)
+            累計売上高(個人別)&ensp;&#047;&ensp;累計売上高(営業部)&ensp;&#047;&ensp;貢献度
         </div>
         <div class="card-body">
             <p class="card-text">
-                ¥{{number_format($sales)}}
+                ¥{{number_format($individual_sales)}}&ensp;&#047;&ensp;¥{{number_format($sales)}}&ensp;&#047;&ensp;{{$contribution}}%
             </p>
         </div>
 

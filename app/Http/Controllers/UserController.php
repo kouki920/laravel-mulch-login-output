@@ -24,11 +24,15 @@ class UserController extends Controller
         $user = new User();
         $gender = $user->getUserGender();
 
-        $sales = Post::where('user_id', $user_id)->sum('total');
+        $individual_sales = Post::where('user_id', $user_id)->sum('total');
+
+        $sales = Post::sum('total');
+
+        $contribution = floor($individual_sales / $sales * 100);
 
         $posts = Post::with(['comments', 'category', 'user'])->orderBy('created_at', 'desc')->where('user_id', $user_id)->paginate(5);
 
-        return view('user.profile', compact('auth', 'posts', 'user_id', 'gender', 'sales'));
+        return view('user.profile', compact('auth', 'posts', 'user_id', 'gender', 'individual_sales', 'sales', 'contribution'));
     }
 
     public function edit($id)
