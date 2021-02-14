@@ -24,7 +24,7 @@ class UserController extends Controller
         $user = new User();
         $gender = $user->getUserGender();
 
-        $sales = Post::sum('total');
+        $sales = Post::where('user_id', $user_id)->sum('total');
 
         $posts = Post::with(['comments', 'category', 'user'])->orderBy('created_at', 'desc')->where('user_id', $user_id)->paginate(5);
 

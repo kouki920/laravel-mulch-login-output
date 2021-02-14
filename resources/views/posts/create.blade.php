@@ -51,10 +51,10 @@
                         </div>
 
                         単価<br>
-                        <input class="form-control" type="number" name="price" value="0">
+                        <input class="form-control" type="number" min="0" name="price" value="0">
                         <br>
                         販売数<br>
-                        <input class="form-control" type="number" name="count" value="0">
+                        <input class="form-control" type="number" min="0" name="count" value="0">
                         <br>
 
                         <div class="form-group">
