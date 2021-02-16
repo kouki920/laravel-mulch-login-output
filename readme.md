@@ -1,5 +1,5 @@
 
-## PF用 掲示板土台->後日Doker使う
+## PF用 掲示板土台->後日Doker(laradock)使う
 
 ## 開発環境
 
