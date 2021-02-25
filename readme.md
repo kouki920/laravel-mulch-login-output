@@ -2,7 +2,7 @@
 ## laravelアウトプット(掲示板作成)
 
 ## 開発環境
-
+* MAMP
 * php 7.4
 * laravel 6
 * Mysql 5.7
