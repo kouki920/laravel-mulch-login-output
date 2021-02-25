@@ -6,6 +6,7 @@
 * php 7.4
 * laravel 6
 * Mysql 5.7
+* Apache
 
 ## 実装機能
 
